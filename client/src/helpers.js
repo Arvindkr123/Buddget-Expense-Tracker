@@ -1,3 +1,8 @@
+export const wait = () =>
+  new Promise((resolve) => {
+    setTimeout(resolve, Math.random() * 2000);
+  });
+
 // generateRandomColor
 const generateRandomColor = () => {
   const existingBudgetLength = fetchData()?.length ?? 0;
