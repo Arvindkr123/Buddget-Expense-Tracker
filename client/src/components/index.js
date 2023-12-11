@@ -1,3 +1,5 @@
 import Navbar from "./Navbar";
 import Intro from "./Intro.jsx";
-export { Navbar };
+import AddBudgetForm from "./AddBudgetForm.jsx";
+
+export { Navbar,Intro, AddBudgetForm };
