@@ -10,11 +10,11 @@ export const dashboardLoader = () => {
 
 const Dashboard = () => {
   const { userName } = useLoaderData();
-  console.log(userName);
+  //console.log(userName);
   return (
     <div>
+      <h1>{userName}</h1>
       Dashboard
-      <h1>Hello {userName}</h1>
     </div>
   );
 };
