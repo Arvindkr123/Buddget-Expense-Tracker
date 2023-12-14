@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { AiOutlineUserAdd } from "react-icons/ai";
-import { Form } from "react-router-dom";
+import { Form, useFetcher } from "react-router-dom";
 import illustrations from "../assets/illustration.jpg";
 
 const Intro = () => {
+  const fetcher = useFetcher();
+  const isSubmitting = fetcher.state === "submitting";
+  const formRef = useRef();
+  const focusRef = useRef();
+
+  useEffect(() => {
+    if (!isSubmitting) {
+      // clear form
+      formRef.current.reset();
+      focusRef.current.focus();
+    }
+  }, [isSubmitting]);
+
   return (
     <div className="intro">
       <div>
@@ -14,8 +27,9 @@ const Intro = () => {
           Personal budgeting is the secret to financial freedom. Start your
           journey today.
         </p>
-        <Form method="post">
+        <fetcher.Form method="post" ref={formRef}>
           <input
+            ref={focusRef}
             type="text"
             name="userName"
             id="userName"
@@ -25,11 +39,15 @@ const Intro = () => {
             required
           />
           <input type="hidden" name="_action" value={"newUser"} />
-          <button type="submit" className="btn btn--dark">
-            <span>Create Account</span>
+          <button
+            type="submit"
+            className="btn btn--dark"
+            disabled={isSubmitting}
+          >
+            <span>{isSubmitting ? "registering user" : "Create Account"}</span>
             <AiOutlineUserAdd width={20} />
           </button>
-        </Form>
+        </fetcher.Form>
       </div>
       <img src={illustrations} alt={"illustrations"} />
     </div>

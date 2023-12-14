@@ -7,13 +7,15 @@ import {
   Intro,
   AddExpenseForm,
   BudgetItem,
+  Table,
 } from "../components";
 
 // loader
 export const dashboardLoader = () => {
   const userName = fetchData("userName");
   const budgets = fetchData("budgets");
-  return { userName, budgets };
+  const expenses = fetchData("expenses");
+  return { userName, budgets, expenses };
 };
 
 // actions
@@ -66,8 +68,8 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-  const { userName, budgets } = useLoaderData();
-  // console.log(budgets);
+  const { userName, budgets, expenses } = useLoaderData();
+  //console.log(expenses);
   return (
     <div>
       {userName ? (
@@ -88,6 +90,16 @@ const Dashboard = () => {
                     return <BudgetItem key={budget.id} budget={budget} />;
                   })}
                 </div>
+                {expenses && expenses.length > 0 && (
+                  <div className="grid-md">
+                    <h2>Recent Expenses</h2>
+                    <Table
+                      expenses={expenses.sort(
+                        (a, b) => b.createdAt - a.createdAt
+                      )}
+                    />
+                  </div>
+                )}
               </div>
             ) : (
               <div className="grid-sm">
