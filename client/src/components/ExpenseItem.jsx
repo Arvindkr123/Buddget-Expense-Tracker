@@ -7,7 +7,7 @@ import {
 } from "../helpers";
 import { Link, useFetcher } from "react-router-dom";
 
-const ExpenseItem = ({ expense }) => {
+const ExpenseItem = ({ expense, showBudget }) => {
   const fetcher = useFetcher();
   const buget = getAllMatchingItems({
     category: "budgets",
@@ -21,11 +21,13 @@ const ExpenseItem = ({ expense }) => {
       <td>{expense.name}</td>
       <td>{formatCurrency(expense.amount)}</td>
       <td>{formDateToLocale(expense.createdAt)}</td>
-      <td>
-        <Link style={{ "--accent": buget.color }} to={`/budget/${buget.id}`}>
-          {buget.name}
-        </Link>
-      </td>
+      {showBudget && (
+        <td>
+          <Link style={{ "--accent": buget.color }} to={`/budget/${buget.id}`}>
+            {buget.name}
+          </Link>
+        </td>
+      )}
       <td>
         <fetcher.Form method="post">
           <input type="hidden" name="_action" value="deleteExpense" />
