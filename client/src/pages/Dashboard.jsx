@@ -1,6 +1,6 @@
 import React from "react";
 import { createBudget, createExpense, fetchData, wait } from "../helpers";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   AddBudgetForm,
@@ -94,10 +94,15 @@ const Dashboard = () => {
                   <div className="grid-md">
                     <h2>Recent Expenses</h2>
                     <Table
-                      expenses={expenses.sort(
-                        (a, b) => b.createdAt - a.createdAt
-                      )}
+                      expenses={expenses
+                        .sort((a, b) => b.createdAt - a.createdAt)
+                        .slice(0, 8)}
                     />
+                    {expenses.length > 8 && (
+                      <Link className="btn btn--dark" to={"expenses"}>
+                        View all expenses
+                      </Link>
+                    )}
                   </div>
                 )}
               </div>
