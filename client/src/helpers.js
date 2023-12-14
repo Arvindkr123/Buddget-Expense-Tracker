@@ -86,3 +86,19 @@ export const formatPercentage = (amt) => {
 export const formDateToLocale = (epoch) => {
   return new Date(epoch).toLocaleDateString();
 };
+
+// delete expense
+export const deleteExpenseItem = ({ key, id }) => {
+  const existingExpenseItem = fetchData(key);
+  if (id) {
+    const newData = existingExpenseItem.filter((exp) => exp.id !== id);
+    return localStorage.setItem(key, JSON.stringify(newData));
+  }
+  return localStorage.removeItem(key);
+};
+
+// get all metching items from localstorage
+export const getAllMatchingItems = ({ category, key, value }) => {
+  const data = fetchData(category) ?? [];
+  return data.filter((item) => item[key] === value);
+};

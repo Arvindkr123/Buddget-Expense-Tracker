@@ -1,9 +1,10 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Dashboard, Error, ExpensePage, expenseLoader} from "./pages";
-import { dashboardAction, dashboardLoader} from "./pages/Dashboard";
+import { Dashboard, Error, ExpensePage, expenseLoader } from "./pages";
+import { dashboardAction, dashboardLoader } from "./pages/Dashboard";
 import Main, { mainLoader } from "./layout/Main";
 import { logoutAction } from "./actions/logout";
+import { expenseActions } from "./pages/ExpensePage";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
         path: "expenses",
         element: <ExpensePage />,
         loader: expenseLoader,
+        action: expenseActions,
       },
       {
         path: "logout",
