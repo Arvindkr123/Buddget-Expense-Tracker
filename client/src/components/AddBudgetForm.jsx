@@ -33,7 +33,7 @@ const AddBudgetForm = () => {
         <div className="grid-xs">
           <label htmlFor="newBudgetAmount">Amount</label>
           <input
-            placeholder="e.g. , $350"
+            placeholder="e.g. , 350RS"
             type="number"
             step={0.01}
             name="newBudgetAmount"
